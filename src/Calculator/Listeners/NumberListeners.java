@@ -13,7 +13,7 @@ public class NumberListeners implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // if there is already a number, put booth number together -> "2" with new input: "3" -> "23"
         // first check if array has already an element, because otherwise .getLast() will throw an error.
-        if (MathFunctions.calculation.size() > 0) {
+        if (!MathFunctions.calculation.isEmpty()) {
 
             // if there is already a number, and the input is another number, both numbers gets appended
             if (Arrays.binarySearch(CalculatorFrame.numbers, String.valueOf(MathFunctions.calculation.getLast().charAt(0))) >= 0) {
