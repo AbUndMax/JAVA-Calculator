@@ -34,6 +34,7 @@ public class NumberListeners implements ActionListener {
             MathFunctions.calculation.add(e.getActionCommand());
         }
 
+        // reprint calculation on display
         CalculatorFrame.display.setText(String.valueOf(MathFunctions.calculation));
     }
 }

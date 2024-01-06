@@ -69,7 +69,7 @@ public class MathFunctions {
         while(multiDivIterator.hasNext()) {
             String currentVal = multiDivIterator.next();
 
-            if (currentVal.equals(CalculatorFrame.basicOperators[2])) {
+            if (currentVal.equals("×")) {
 
                 //System.out.println("current Index:" + (multiDivIterator.nextIndex()-2));
                 Double number1 = Double.parseDouble(listCC.remove(multiDivIterator.nextIndex()-2));
@@ -80,7 +80,7 @@ public class MathFunctions {
                 return calculateArrayList(listCC);
             }
 
-            else if (currentVal.equals(CalculatorFrame.basicOperators[3])) {
+            else if (currentVal.equals("÷")) {
                 Double number1 = Double.parseDouble(listCC.remove(multiDivIterator.nextIndex()-1));
                 listCC.remove(multiDivIterator.nextIndex()-1);
                 Double number2 = Double.parseDouble(listCC.remove(multiDivIterator.nextIndex()-1));
@@ -96,7 +96,7 @@ public class MathFunctions {
         while(addSubIterator.hasNext()) {
             String currentVal = addSubIterator.next();
 
-            if (currentVal.equals(CalculatorFrame.basicOperators[0])) {
+            if (currentVal.equals("+")) {
                 Double number1 = Double.parseDouble(listCC.remove(addSubIterator.nextIndex()-2));
                 listCC.remove(addSubIterator.nextIndex()-2);
                 Double number2 = Double.parseDouble(listCC.remove(addSubIterator.nextIndex()-2));
@@ -105,7 +105,7 @@ public class MathFunctions {
                 return calculateArrayList(listCC);
             }
 
-            else if (currentVal.equals(CalculatorFrame.basicOperators[1])) {
+            else if (currentVal.equals("-")) {
                 Double number1 = Double.parseDouble(listCC.remove(addSubIterator.nextIndex()-1));
                 listCC.remove(addSubIterator.nextIndex()-1);
                 Double number2 = Double.parseDouble(listCC.remove(addSubIterator.nextIndex()-1));
