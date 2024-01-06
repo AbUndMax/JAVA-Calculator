@@ -31,8 +31,12 @@ public class CalculatorFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        int counter = 0;
 
+        // set Display Layout
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth = 4;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         // create Display
         display.setFont(new Font("Sans Serif", Font.BOLD, 24));
         display.setOpaque(true);
@@ -41,21 +45,15 @@ public class CalculatorFrame extends JFrame {
         display.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         display.setPreferredSize(new Dimension(380, 50));
         display.setText(String.valueOf(MathFunctions.calculation));
-
-
-        // set Display Layout
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = 4;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
+        // add Display
         add(display, gbc);
+
 
         // set Layout for all Buttons
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
         gbc.gridwidth = 1;
-
         // add Buttons via own methods on Frame
         createMultipleButtons(additionalFunctions, additionalListener, 1, 1, 0, 3, false);
         createMultipleButtons(basicOperators, basicListener, 1, 4, 3, 1, false);
