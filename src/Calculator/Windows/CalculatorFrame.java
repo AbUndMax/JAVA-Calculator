@@ -1,11 +1,9 @@
 package Calculator.Windows;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import Calculator.Calculations.MathFunctions;
 import Calculator.Listeners.*;
 
 import static Calculator.Calculations.MathFunctions.calculateCalculation;
