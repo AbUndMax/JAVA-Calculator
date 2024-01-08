@@ -74,21 +74,10 @@ public class CalculatorFrame extends JFrame {
         gbc.gridx = 2;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
-        createButton(specialButtons[2], specialListener, new Color(255, 229, 204));
+        createButton(specialButtons[2], specialListener);
     }
 
     private void createButton(String name, ActionListener listener){
-        JButton button = new JButton();
-        Font currentFont = button.getFont();
-        Font newFont = new Font(currentFont.getName(), currentFont.BOLD, 20);
-        button.setText(name);
-        button.addActionListener(listener);
-        button.setActionCommand(name);
-        button.setFont(newFont);
-        add(button, gbc);
-    }
-
-    private void createButton(String name, ActionListener listener, Color backgroundColor){
         JButton button = new JButton();
         Font currentFont = button.getFont();
         Font newFont = new Font(currentFont.getName(), currentFont.BOLD, 20);
