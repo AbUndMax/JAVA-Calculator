@@ -15,10 +15,14 @@ public class BasicOperatorListeners implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String buttonInput = e.getActionCommand();
 
-        // if calculation is empty and the last entry in calculation is a number, the operator is inserted into the calculation
-        if (!calculation.isEmpty()) {
-            if (isLastEntryNumber())
-                calculation.add(buttonInput);
+        // if the last entry in calculation is a number, the operator is inserted into the calculation
+        // else, the last operator will be overwritten by the new one.
+        if (isLastEntryNumber()) {
+            calculation.add(buttonInput);
+        }
+
+        else {
+            calculation.set(calculation.size() - 1, buttonInput);
         }
 
         // reprint calculation on display

@@ -39,6 +39,8 @@ public class CalculatorFrame extends JFrame {
         gbc.gridwidth = 4;
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.weighty = 0;
         gbc.insets = new Insets(3, 3, 1, 3);
         // create Display
         display.setFont(new Font("Sans Serif", Font.BOLD, 24));
@@ -47,7 +49,7 @@ public class CalculatorFrame extends JFrame {
         display.setForeground(Color.BLACK);
         display.setHorizontalAlignment(SwingConstants.RIGHT);
         display.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        display.setPreferredSize(new Dimension(380, 50));
+        display.setPreferredSize(new Dimension(100, 50));
         // add Display
         add(display, gbc);
         displayCalculation();

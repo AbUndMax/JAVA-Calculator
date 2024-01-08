@@ -3,6 +3,7 @@ package Calculator.Listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.List;
 
 import Calculator.Calculations.MathFunctions;
 import Calculator.Windows.CalculatorFrame;
@@ -19,6 +20,7 @@ public class AdditionalListeners implements ActionListener {
             // clear calculation
             case "C":
                 calculation.clear();
+                calculation.add("0");
                 break;
 
             // changes the last number to negative if positive and to positive if negative
@@ -34,6 +36,7 @@ public class AdditionalListeners implements ActionListener {
                 break;
 
             case "%":
+                // simply adds a 0.01 multiplication
                 if (isLastEntryNumber()) {
                     calculation.set(calculation.size() - 1, String.valueOf(Double.parseDouble(calculation.getLast()) * 0.01));
                 }
@@ -44,9 +47,9 @@ public class AdditionalListeners implements ActionListener {
         CalculatorFrame.displayCalculation();
     }
 
+    // this function checks, rather the last entry in calculation is a number or not!
     public static final Boolean isLastEntryNumber() {
-        if (!calculation.isEmpty()) {
-            return Arrays.binarySearch(CalculatorFrame.numbers, String.valueOf(calculation.getLast().charAt(calculation.getLast().length() - 1))) >= 0;
-        } else return false;
+        List<String> numbersList = Arrays.asList(CalculatorFrame.numbers);
+        return numbersList.contains(String.valueOf(calculation.getLast().charAt(calculation.getLast().length() - 1)));
     }
 }

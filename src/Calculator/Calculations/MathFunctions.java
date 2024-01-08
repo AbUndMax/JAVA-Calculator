@@ -1,7 +1,5 @@
 package Calculator.Calculations;
 
-import Calculator.Windows.CalculatorFrame;
-
 import java.util.*;
 
 public class MathFunctions {

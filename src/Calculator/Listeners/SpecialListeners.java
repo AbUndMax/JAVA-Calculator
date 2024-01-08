@@ -19,6 +19,8 @@ public class SpecialListeners implements ActionListener {
 
         switch (buttonInput) {
             case "(":
+                //if the last entry is a operator, "(" will be added to calculation
+                // otherwise if the last entry is a number, a multiplication symbol will be added in between
                 if (Arrays.binarySearch(CalculatorFrame.basicOperators, calculation.getLast()) >= 0) {
                     calculation.add("(");
                 } else if (isLastEntryNumber()) {
@@ -28,7 +30,9 @@ public class SpecialListeners implements ActionListener {
                 break;
 
             case ".":
-                if (!calculation.isEmpty()) {
+                // if the last entry in the calculation list is a number and it does not already contain a . the a
+                // "." will be concatenated to the last string in calculation list.
+                if (isLastEntryNumber()) {
                     if (!calculation.getLast().contains(".")) {
                         calculation.set(calculation.size() - 1, calculation.getLast() + buttonInput);
                     }
@@ -36,8 +40,22 @@ public class SpecialListeners implements ActionListener {
                 break;
 
             case "=":
-                if (isLastEntryNumber())
+                // if last entry is a number, the result gets shown on the display, the calculation is cleared and
+                // the new entry is the last result, so we can calculate with our last result.
+                if (isLastEntryNumber()) {
                     CalculatorFrame.displayResult();
+
+                    Double result = MathFunctions.calculateCalculation();
+                    String resultString;
+                    if (result == Math.floor(result)) {
+                        resultString = String.valueOf(result.intValue());
+                    } else {
+                        resultString = String.valueOf(result);
+                    }
+                    calculation.clear();
+                    calculation.add(resultString);
+                }
+
                 return;
         }
 
