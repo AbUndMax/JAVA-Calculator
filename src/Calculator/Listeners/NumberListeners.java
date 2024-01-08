@@ -2,6 +2,8 @@ package Calculator.Listeners;
 
 import Calculator.Calculations.MathFunctions;
 import Calculator.Windows.CalculatorFrame;
+import static Calculator.Calculations.MathFunctions.calculation;
+import static Calculator.Listeners.AdditionalListeners.isLastEntryNumber;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,28 +15,39 @@ public class NumberListeners implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // if there is already a number, put booth number together -> "2" with new input: "3" -> "23"
         // first check if array has already an element, because otherwise .getLast() will throw an error.
-        if (!MathFunctions.calculation.isEmpty()) {
+        if (!calculation.isEmpty()) {
 
             // if there is already a number, and the input is another number, both numbers gets appended
-            if (Arrays.binarySearch(CalculatorFrame.numbers, String.valueOf(MathFunctions.calculation.getLast().charAt(0))) >= 0) {
-                MathFunctions.calculation.set(MathFunctions.calculation.size() - 1, MathFunctions.calculation.getLast() + e.getActionCommand());
+            if (isLastEntryNumber()) {
+                calculation.set(calculation.size() - 1, calculation.getLast() + e.getActionCommand());
+            }
+
+
+            else if (calculation.getLast().contains(".") & countOccurrencesOfDot(calculation.getLast()) == 1) {
+                calculation.set(calculation.size() - 1, calculation.getLast() + e.getActionCommand());
             }
 
             // if the last entry has an . the next number gets appended
-            else if (MathFunctions.calculation.getLast().contains(".")) {
-                MathFunctions.calculation.set(MathFunctions.calculation.size() - 1, MathFunctions.calculation.getLast() + e.getActionCommand());
+            else if (calculation.getLast().contains(".")) {
+                calculation.set(calculation.size() - 1, calculation.getLast() + e.getActionCommand());
             }
 
             // otherwise the number gets just added to the calculation list
-            else {
-                MathFunctions.calculation.add(e.getActionCommand());
-            }
+            else calculation.add(e.getActionCommand());
         }
-        else {
-            MathFunctions.calculation.add(e.getActionCommand());
-        }
+        else calculation.add(e.getActionCommand());
 
         // reprint calculation on display
-        CalculatorFrame.display.setText(String.valueOf(MathFunctions.calculation));
+        CalculatorFrame.displayCalculation();
+    }
+
+    private static int countOccurrencesOfDot(String text) {
+        int count = 0;
+
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == '.') count++;
+        }
+
+        return count;
     }
 }

@@ -19,6 +19,6 @@ public class ExtendedListeners implements ActionListener {
         }
 
         // reprint calculation on display
-        CalculatorFrame.display.setText(String.valueOf(MathFunctions.calculation));
+        CalculatorFrame.displayCalculation();
     }
 }

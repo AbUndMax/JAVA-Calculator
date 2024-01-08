@@ -6,7 +6,7 @@ import java.util.*;
 
 public class MathFunctions {
 
-    public static ArrayList<String> calculation = new ArrayList<>();
+    public static ArrayList<String> calculation = new ArrayList<>(Arrays.asList("0"));
 
     public static Double calculateCalculation(){
         return calculateArrayList(calculation);
@@ -22,7 +22,6 @@ public class MathFunctions {
         ArrayList<String> listCC = new ArrayList<>(list);
 
         ListIterator<String> parenthesisIterator = list.listIterator();
-
 
          //System.out.println("\n check for parenthesis ###");
         while(parenthesisIterator.hasNext()) {
@@ -81,11 +80,11 @@ public class MathFunctions {
             }
 
             else if (currentVal.equals("÷")) {
-                Double number1 = Double.parseDouble(listCC.remove(multiDivIterator.nextIndex()-1));
-                listCC.remove(multiDivIterator.nextIndex()-1);
-                Double number2 = Double.parseDouble(listCC.remove(multiDivIterator.nextIndex()-1));
+                Double number1 = Double.parseDouble(listCC.remove(multiDivIterator.nextIndex()-2));
+                listCC.remove(multiDivIterator.nextIndex()-2);
+                Double number2 = Double.parseDouble(listCC.remove(multiDivIterator.nextIndex()-2));
 
-                listCC.add(multiDivIterator.nextIndex()-1, String.valueOf(number1 / number2));
+                listCC.add(multiDivIterator.nextIndex()-2, String.valueOf(number1 / number2));
                 return calculateArrayList(listCC);
             }
         }
@@ -106,15 +105,16 @@ public class MathFunctions {
             }
 
             else if (currentVal.equals("-")) {
-                Double number1 = Double.parseDouble(listCC.remove(addSubIterator.nextIndex()-1));
-                listCC.remove(addSubIterator.nextIndex()-1);
-                Double number2 = Double.parseDouble(listCC.remove(addSubIterator.nextIndex()-1));
+                Double number1 = Double.parseDouble(listCC.remove(addSubIterator.nextIndex()-2));
+                listCC.remove(addSubIterator.nextIndex()-2);
+                Double number2 = Double.parseDouble(listCC.remove(addSubIterator.nextIndex()-2));
 
-                listCC.add(addSubIterator.nextIndex()-1, String.valueOf(number1 - number2));
+                listCC.add(addSubIterator.nextIndex()-2, String.valueOf(number1 - number2));
                 return calculateArrayList(listCC);
             }
         }
 
         return Double.parseDouble(listCC.getFirst());
     }
+
 }

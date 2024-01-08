@@ -3,6 +3,9 @@ package Calculator.Listeners;
 import Calculator.Calculations.MathFunctions;
 import Calculator.Windows.CalculatorFrame;
 
+import static Calculator.Calculations.MathFunctions.calculation;
+import static Calculator.Listeners.AdditionalListeners.isLastEntryNumber;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -16,20 +19,29 @@ public class SpecialListeners implements ActionListener {
 
         switch (buttonInput) {
             case "(":
-                if (Arrays.binarySearch(CalculatorFrame.basicOperators, MathFunctions.calculation.getLast()) >= 0) {
-                    MathFunctions.calculation.add(buttonInput);
-                } else if (Arrays.binarySearch(CalculatorFrame.numbers, MathFunctions.calculation.getLast()) >= 0) {
-                    MathFunctions.calculation.add("×");
-                    MathFunctions.calculation.add("(");
+                if (Arrays.binarySearch(CalculatorFrame.basicOperators, calculation.getLast()) >= 0) {
+                    calculation.add("(");
+                } else if (isLastEntryNumber()) {
+                    calculation.add("×");
+                    calculation.add("(");
                 }
                 break;
+
             case ".":
-                MathFunctions.calculation.set(MathFunctions.calculation.size() - 1, MathFunctions.calculation.getLast() + buttonInput);
+                if (!calculation.isEmpty()) {
+                    if (!calculation.getLast().contains(".")) {
+                        calculation.set(calculation.size() - 1, calculation.getLast() + buttonInput);
+                    }
+                }
                 break;
 
+            case "=":
+                if (isLastEntryNumber())
+                    CalculatorFrame.displayResult();
+                return;
         }
 
-        // reprint calculation on display
-        CalculatorFrame.display.setText(String.valueOf(MathFunctions.calculation));
+        //reprint calculation on display
+        CalculatorFrame.displayCalculation();
     }
 }
