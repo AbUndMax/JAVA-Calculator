@@ -1,4 +1,4 @@
-package Calculator.Listeners;
+package Calculator.Handlers;
 
 import Calculator.Calculations.MathFunctions;
 import Calculator.Windows.CalculatorFrame;
@@ -6,13 +6,11 @@ import Calculator.Windows.CalculatorFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ExtendedListeners implements ActionListener {
+public class ExtendedHandler {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String buttonInput = e.getActionCommand();
+    public static void extendedHandler(String command) {
 
-        switch (buttonInput) {
+        switch (command) {
             case "√":
                 MathFunctions.calculation.add("√");
 

@@ -1,22 +1,18 @@
-package Calculator.Listeners;
+package Calculator.Handlers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
 
-import Calculator.Calculations.MathFunctions;
 import Calculator.Windows.CalculatorFrame;
 
 import static Calculator.Calculations.MathFunctions.calculation;
 
-public class AdditionalListeners implements ActionListener {
+public class AdditionalHandler {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String buttonInput = e.getActionCommand();
 
-        switch(buttonInput){
+    public static void additionalHandler(String eventString) {
+
+        switch(eventString){
             // clear calculation
             case "C":
                 calculation.clear();

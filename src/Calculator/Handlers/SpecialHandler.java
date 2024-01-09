@@ -1,23 +1,20 @@
-package Calculator.Listeners;
+package Calculator.Handlers;
 
 import Calculator.Calculations.MathFunctions;
 import Calculator.Windows.CalculatorFrame;
 
 import static Calculator.Calculations.MathFunctions.calculation;
-import static Calculator.Listeners.AdditionalListeners.isLastEntryNumber;
+import static Calculator.Handlers.AdditionalHandler.isLastEntryNumber;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-public class SpecialListeners implements ActionListener {
+public class SpecialHandler {
 
+    public static void specialHandler(String command) {
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String buttonInput = e.getActionCommand();
-
-        switch (buttonInput) {
+        switch (command) {
             case "(":
                 //if the last entry is a operator, "(" will be added to calculation
                 // otherwise if the last entry is a number, a multiplication symbol will be added in between
@@ -34,7 +31,7 @@ public class SpecialListeners implements ActionListener {
                 // "." will be concatenated to the last string in calculation list.
                 if (isLastEntryNumber()) {
                     if (!calculation.getLast().contains(".")) {
-                        calculation.set(calculation.size() - 1, calculation.getLast() + buttonInput);
+                        calculation.set(calculation.size() - 1, calculation.getLast() + command);
                     }
                 }
                 break;
