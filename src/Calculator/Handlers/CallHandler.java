@@ -2,8 +2,10 @@ package Calculator.Handlers;
 
 import Calculator.Windows.CalculatorFrame;
 
-// This is just for deciding which Handler should be used, based on the input of the Action nListener!
-// That allows us to use Key and Button Listeners on the same Methods!
+// This class is the "bridge" between the listeners and handlers. This allows us to use the same handlers for the key and
+// button listeners likewise!!
+
+// there are multiple handler classes, simply for organisation reasons and improve code readability!
 
 public class CallHandler {
 
@@ -31,6 +33,8 @@ public class CallHandler {
         }
     }
 
+    // the following functions are all simply for checking to which handler the input has to be parsed.
+
     private static Boolean isAdditionalFunction(String command) {
         for (String additionalFunction : CalculatorFrame.additionalFunctions) {
             if (command.equals(additionalFunction)) {
@@ -49,15 +53,6 @@ public class CallHandler {
         return false;
     }
 
-    private static Boolean isExtendedFunction(String command) {
-        for (String extendedFunction : CalculatorFrame.extendedFunctions) {
-            if (command.equals(extendedFunction)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private static Boolean isNumber(String command) {
         for (String number : CalculatorFrame.numbers) {
             if (command.equals(number)) {
@@ -70,6 +65,15 @@ public class CallHandler {
     private static Boolean isSpecialFunction(String command) {
         for (String specialFunction : CalculatorFrame.specialButtons) {
             if (command.equals(specialFunction)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static Boolean isExtendedFunction(String command) {
+        for (String extendedFunction : CalculatorFrame.extendedFunctions) {
+            if (command.equals(extendedFunction)) {
                 return true;
             }
         }

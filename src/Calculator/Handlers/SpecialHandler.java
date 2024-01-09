@@ -15,16 +15,6 @@ public class SpecialHandler {
     public static void specialHandler(String command) {
 
         switch (command) {
-            case "(":
-                //if the last entry is a operator, "(" will be added to calculation
-                // otherwise if the last entry is a number, a multiplication symbol will be added in between
-                if (Arrays.binarySearch(CalculatorFrame.basicOperators, calculation.getLast()) >= 0) {
-                    calculation.add("(");
-                } else if (isLastEntryNumber()) {
-                    calculation.add("×");
-                    calculation.add("(");
-                }
-                break;
 
             case ".":
                 // if the last entry in the calculation list is a number and it does not already contain a . the a
@@ -39,7 +29,7 @@ public class SpecialHandler {
             case "=":
                 // if last entry is a number, the result gets shown on the display, the calculation is cleared and
                 // the new entry is the last result, so we can calculate with our last result.
-                if (isLastEntryNumber()) {
+                if (isLastEntryNumber() | calculation.getLast().equals(")")) {
                     CalculatorFrame.displayResult();
 
                     Double result = MathFunctions.calculateCalculation();
