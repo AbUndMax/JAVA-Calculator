@@ -25,19 +25,22 @@ public class CalculatorFrame extends JFrame {
     public static final JRadioButton radio1 = new JRadioButton("normal view");
     public static final JRadioButton radio2 = new JRadioButton("extended view");
     private static final JPanel extendedButtonsPane = new JPanel(new GridLayout(1, 4));
+    private static final JPanel displayPanel = new JPanel(new BorderLayout());
 
 
     public static final String[] basicOperators = {"+", "-", "×", "÷"};
     public static final String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
     public static final String[] additionalFunctions = {"C" , "±", "%"};
-    public static final String[] specialButtons = {".", "="};
+    public static final String[] specialButtons = {".", "=", "⌫"};
     public static final String[] extendedFunctions = {"√", "^", "(", ")"};
 
     public CalculatorFrame() {
+
+        // Frame settings
         setTitle("Calculator");
         setLayout(new GridBagLayout());
         setSize(350, 500);
-        setMinimumSize(new Dimension(300, 400));
+        setMinimumSize(new Dimension(200, 300));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -47,14 +50,6 @@ public class CalculatorFrame extends JFrame {
 
 
         // set Display Layout
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridwidth = 4;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridheight = 1;
-        gbc.weighty = 0;
-        gbc.insets = new Insets(3, 3, 1, 3);
-
         // create Display
         display.setFont(new Font("Sans Serif", Font.BOLD, 24));
         display.setPreferredSize(new Dimension(100, 50));
@@ -67,13 +62,35 @@ public class CalculatorFrame extends JFrame {
         StyleConstants.setAlignment(align, StyleConstants.ALIGN_RIGHT);
         style.setParagraphAttributes(0, style.getLength(), align, false);
 
-        // add scrollbar for bigger calculations
+        // add scrollbar for bigger calculations ( the right side is always visible)
+        // make the scrollBars invisible!
         JScrollBar horizontalScrollBar = new JScrollBar(JScrollBar.HORIZONTAL);
         horizontalScrollBar.setPreferredSize(new Dimension(0, 0));
         scrollPane.setHorizontalScrollBar(horizontalScrollBar);
 
+        JScrollBar verticalScrollBar = new JScrollBar(JScrollBar.VERTICAL);
+        verticalScrollBar.setPreferredSize(new Dimension(0, 0));
+        scrollPane.setVerticalScrollBar(verticalScrollBar);
+
+        displayPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // create a Button which allows the user to redo their input
+        JButton delButton = createButton("⌫");
+        delButton.setPreferredSize(new Dimension(40, 50));
+        displayPanel.add(delButton, BorderLayout.EAST);
+
+
+        // add displayPanel to frame
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.weighty = 0;
+        gbc.gridwidth = 4;
+        gbc.insets = new Insets(3, 3, 1, 3);
+
         // add to this frame
-        add(scrollPane, gbc);
+        add(displayPanel, gbc);
         displayCalculation();
 
 
@@ -91,12 +108,13 @@ public class CalculatorFrame extends JFrame {
         // add special buttons with special layout
         gbc.gridx = 1;
         gbc.gridy = 6;
-        createButton(specialButtons[0]);
+        add(createButton(specialButtons[0]), gbc);
 
         gbc.gridx = 2;
         gbc.gridy = 6;
         gbc.gridwidth = 2;
-        createButton(specialButtons[1]);
+        add(createButton(specialButtons[1]), gbc);
+
 
         // add buttons to activate "extend" Mode
         gbc.gridx = 0;
@@ -105,10 +123,12 @@ public class CalculatorFrame extends JFrame {
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.CENTER;
+
         radio1.setActionCommand("normal");
         radio2.setActionCommand("extended");
         radio1.addActionListener(radioListener);
         radio2.addActionListener(radioListener);
+
         ButtonGroup radioGroup = new ButtonGroup();
         radioGroup.add(radio1);
         radioGroup.add(radio2);
@@ -120,6 +140,7 @@ public class CalculatorFrame extends JFrame {
         gbc.gridx = 2;
         add(radio2, gbc);
 
+
         // add extended Functions
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1.0;
@@ -128,11 +149,13 @@ public class CalculatorFrame extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
 
-        createExtendButton();
+        for (String name : extendedFunctions) {
+            extendedButtonsPane.add(createButton(name));
+        }
 
     }
 
-    private void createButton(String name){
+    private JButton createButton(String name){
         JButton button = new JButton();
         Font currentFont = button.getFont();
         Font newFont = new Font(currentFont.getName(), currentFont.BOLD, 20);
@@ -140,7 +163,8 @@ public class CalculatorFrame extends JFrame {
         button.addActionListener(buttonListener);
         button.setActionCommand(name);
         button.setFont(newFont);
-        add(button, gbc);
+
+        return button;
     }
 
     private void createMultipleButtons(String[] buttonArray, int row, int numberRows, int column, int numberColumns, Boolean byRow) {
@@ -150,7 +174,8 @@ public class CalculatorFrame extends JFrame {
             for (String buttonName : buttonArray) {
                 gbc.gridy = counter / numberRows + row;
                 gbc.gridx = counter % numberColumns + column;
-                createButton(buttonName);
+                add(createButton(buttonName), gbc);
+
                 counter++;
             }
         }
@@ -158,23 +183,9 @@ public class CalculatorFrame extends JFrame {
             for (String buttonName : buttonArray) {
                 gbc.gridy = counter % numberRows + row;
                 gbc.gridx = counter % numberColumns + column;
-                createButton(buttonName);
+                add(createButton(buttonName), gbc);
                 counter++;
             }
-        }
-    }
-
-    private void createExtendButton(){
-
-        for (String name : extendedFunctions) {
-            JButton button = new JButton();
-            Font currentFont = button.getFont();
-            Font newFont = new Font(currentFont.getName(), currentFont.BOLD, 20);
-            button.setText(name);
-            button.addActionListener(buttonListener);
-            button.setActionCommand(name);
-            button.setFont(newFont);
-            extendedButtonsPane.add(button);
         }
     }
 

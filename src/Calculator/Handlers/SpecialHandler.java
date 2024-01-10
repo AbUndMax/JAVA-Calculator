@@ -44,6 +44,20 @@ public class SpecialHandler {
                 }
 
                 return;
+
+            case "⌫":
+                String str = calculation.getLast();
+
+                if (str.length() == 1 & !calculation.isEmpty()) {
+                    calculation.removeLast();
+
+                    if (calculation.isEmpty()) {
+                        calculation.add("0");
+                    }
+                }
+                else {
+                    calculation.set(calculation.size() - 1, str.substring(0, str.length() - 1));
+                }
         }
 
         //reprint calculation on display

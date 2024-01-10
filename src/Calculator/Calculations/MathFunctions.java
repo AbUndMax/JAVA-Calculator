@@ -17,8 +17,9 @@ public class MathFunctions {
     // check the function for himself.
     private static Double calculateArrayList(ArrayList<String> list){
 
+        // these two debuggers are the most useful ones! -> they show if the function gets called! (so they show each recursive call)
         //System.out.println("\n#######################");
-        System.out.println("new list" + list);
+        //System.out.println("new list" + list);
 
         ArrayList<String> listCC = new ArrayList<>(list);
 
@@ -40,8 +41,9 @@ public class MathFunctions {
                     if (backwardIterator.previous().equals(")")) {
                         //System.out.println("back parenthesis found");
 
-                        ArrayList<String> operationsBetweenParenthesis = new ArrayList<String>(list.subList(rootIterator.nextIndex()+1,
-                                backwardIterator.previousIndex() + 1));
+                        ArrayList<String> operationsBetweenParenthesis =
+                                new ArrayList<String>(list.subList(rootIterator.nextIndex()+1,
+                                    backwardIterator.previousIndex() + 1));
 
                         // calculate value between the parenthesis
                         Double insertion = Math.sqrt(calculateArrayList(operationsBetweenParenthesis));
@@ -80,8 +82,9 @@ public class MathFunctions {
                     if (backwardIterator.previous().equals(")")) {
                         //System.out.println("back parenthesis found");
 
-                        ArrayList<String> operationsBetweenParenthesis = new ArrayList<String>(list.subList(parenthesisIterator.nextIndex(),
-                                                                                                            backwardIterator.previousIndex() + 1));
+                        ArrayList<String> operationsBetweenParenthesis =
+                                new ArrayList<String>(list.subList(parenthesisIterator.nextIndex(),
+                                                        backwardIterator.previousIndex() + 1));
 
                         // calculate value between the parenthesis
                         Double insertion = calculateArrayList(operationsBetweenParenthesis);

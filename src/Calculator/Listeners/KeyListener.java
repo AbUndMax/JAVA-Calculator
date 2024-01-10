@@ -21,6 +21,8 @@ public class KeyListener implements java.awt.event.KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             callHandler("=");
         }
+        if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+            callHandler("⌫");
         callHandler(Character.toString(e.getKeyChar()));
     }
 
