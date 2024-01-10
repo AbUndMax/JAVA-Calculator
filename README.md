@@ -25,17 +25,19 @@ and extended operations like (), root, exponents
 It basically searches the calculation ArrayList for the operators
 in order of their priority (root > parenthesis > exponents > multiplication & division > addition & substraction)
 
-**square-root:**
+- **square-root:**
 for the root it will search from the left starting of calculation for a root symbol
 if it found one, it will proceed like with parenthesis but the returning value gets rooted (square root)
  
-**parenthesis:**
+
+- **parenthesis:**
 th function searches from the left for an opening "(" bracket. if it found one, it searches with a new iterator for
 an closing ")" bracket. It then will take EVERYTHING inside those booth brackets to a substring (which will basically
 end up as the calculation for the most outer brackets of the actual calculation) and call the calculateArrayList
 function recursive.
 
-**for all the other operations it is straight forward:**
+
+- **for all the other operations it is straight forward:**
 The Algorithm searches for an operator i.e. ^ * / + -
 if it found one. It will take the String to the left and to the right of this operator, transfer them to an Double and
 use the corresponding math operator on these numbers. all three string "number1" "operator" "number2" are getting deleted
