@@ -16,7 +16,7 @@ public class SpecialHandler {
         switch (command) {
 
             case ".":
-                // if the last entry in the calculation list is a number and it does not already contain a . the a
+                // if the last entry in the calculation list is a number and it does not already contain a . the
                 // "." will be concatenated to the last string in calculation list.
                 if (isLastEntryNumber()) {
 
@@ -60,9 +60,9 @@ public class SpecialHandler {
                 else {
                     replaceLast(lastEntry.substring(0, lastEntry.length() - 1));
                 }
+
         }
 
-        //reprint calculation on display
-        CalculatorFrame.displayCalculation();
     }
+
 }

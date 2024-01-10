@@ -13,6 +13,7 @@ public class ButtonListener implements ActionListener {
         this.frame = frame;
     }
 
+    // button is pressed -> actionCommand is parsed to callHandler
     @Override
     public void actionPerformed(ActionEvent e) {
         callHandler(e.getActionCommand());

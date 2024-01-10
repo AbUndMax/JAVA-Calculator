@@ -17,7 +17,8 @@ public class MathFunctions {
     // check the function for himself.
     private static Double calculateArrayList(ArrayList<String> list){
 
-        // these two debuggers are the most useful ones! -> they show if the function gets called! (so they show each recursive call)
+        // these two debuggers are the most useful ones! -> they show if the function gets called! (so they show each
+        // recursive call)
         //System.out.println("\n#######################");
         //System.out.println("new list" + list);
 
@@ -48,12 +49,8 @@ public class MathFunctions {
                         // calculate value between the parenthesis
                         Double insertion = Math.sqrt(calculateArrayList(operationsBetweenParenthesis));
 
-                        //System.out.println("back to first loop");
-                        //System.out.println(backwardIterator.previousIndex());
-                        //System.out.println(listCC.size());
-                        //System.out.println(listCC.subList(parenthesisIterator.nextIndex()-1, backwardIterator.nextIndex()));
-
-                        // delete parenthesis and all elements between them, add calculated value inside the parenthesis to the index of the opening parenthesis
+                        // delete root + parenthesis and all elements between them, add calculated value inside the
+                        // parenthesis to the index of the opening parenthesis
                         listCC.subList(rootIterator.nextIndex()-1, backwardIterator.previousIndex()+2).clear();
 
                         // add value between parenthesis to listCopy
@@ -89,12 +86,8 @@ public class MathFunctions {
                         // calculate value between the parenthesis
                         Double insertion = calculateArrayList(operationsBetweenParenthesis);
 
-                        //System.out.println("back to first loop");
-                        //System.out.println(backwardIterator.previousIndex());
-                        //System.out.println(listCC.size());
-                        //System.out.println(listCC.subList(parenthesisIterator.nextIndex()-1, backwardIterator.nextIndex()));
-
-                        // delete parenthesis and all elements between them, add calculated value inside the parenthesis to the index of the opening parenthesis
+                        // delete parenthesis and all elements between them, add calculated value inside the parenthesis
+                        // to the index of the opening parenthesis
                         listCC.subList(parenthesisIterator.nextIndex()-1, backwardIterator.previousIndex()+2).clear();
 
                         // add value between parenthesis to listCopy
@@ -106,9 +99,14 @@ public class MathFunctions {
             }
         }
 
+        // If there is an Operator found, the number left and right from it will be taken and a calculation of them
+        // booth will be performed based on the found operator.
+        // Therefore, all three Strings "number1" "operator" "number2" are getting deleted in listCC and replaced with
+        // the result of the calculation! Then a recursive call is performed on the new listCC.
+
         ListIterator<String> exponentialIterator = list.listIterator();
 
-
+        // System.out.println("\n check for ^ ###");
         while (exponentialIterator.hasNext()) {
             String currentVal = exponentialIterator.next();
 

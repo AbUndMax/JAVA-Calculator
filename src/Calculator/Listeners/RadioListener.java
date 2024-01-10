@@ -21,10 +21,11 @@ public class RadioListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JRadioButton source = (JRadioButton) e.getSource();
 
+        // if the radio1 button is selected, the extendedPanel is closed
         if (source == radio1) {
             frame.normalView();
         }
-
+        // if the radio2 button is selected, the extendedPanel is ... well ... extended.
         if (source == radio2) {
             frame.extendView();
         }

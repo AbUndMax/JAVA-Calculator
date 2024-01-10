@@ -36,6 +36,9 @@ public class CallHandler {
         if (isExtendedFunction(command)) {
             ExtendedHandler.extendedHandler(command);
         }
+
+        // reprint calculation on display after handling
+        CalculatorFrame.displayCalculation();
     }
 
     // the following functions are all simply for checking to which handler the input has to be parsed.

@@ -1,7 +1,5 @@
 package Calculator.Handlers;
 
-import Calculator.Windows.CalculatorFrame;
-
 import static Calculator.Calculations.MathFunctions.calculation;
 import static Calculator.Handlers.CallHandler.replaceLast;
 import static Calculator.Handlers.CallHandler.isLastEntryNumber;
@@ -39,8 +37,6 @@ public class AdditionalHandler {
                 break;
         }
 
-        // reprint calculation on display
-        CalculatorFrame.displayCalculation();
     }
 
 }

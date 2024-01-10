@@ -56,7 +56,6 @@ public class ExtendedHandler {
 
         }
 
-        // reprint calculation on display
-        CalculatorFrame.displayCalculation();
     }
+
 }

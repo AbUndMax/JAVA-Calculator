@@ -15,10 +15,12 @@ import static Calculator.Calculations.MathFunctions.calculation;
 
 public class CalculatorFrame extends JFrame {
 
-    private static KeyListener keyListener = new Calculator.Listeners.KeyListener();
+    //Listeners
+    private static final KeyListener keyListener = new Calculator.Listeners.KeyListener();
     private ButtonListener buttonListener = new ButtonListener(this);
     private RadioListener radioListener = new RadioListener(this);
 
+    // GUI-Components
     private static GridBagConstraints gbc = new GridBagConstraints();
     public static final JTextPane display = new JTextPane();
     private static final JScrollPane scrollPane = new JScrollPane(display);
@@ -27,12 +29,13 @@ public class CalculatorFrame extends JFrame {
     private static final JPanel extendedButtonsPane = new JPanel(new GridLayout(1, 4));
     private static final JPanel displayPanel = new JPanel(new BorderLayout());
 
-
+    // Button Name Arrays
     public static final String[] basicOperators = {"+", "-", "×", "÷"};
     public static final String[] numbers = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
     public static final String[] additionalFunctions = {"C" , "±", "%"};
     public static final String[] specialButtons = {".", "=", "⌫"};
     public static final String[] extendedFunctions = {"√", "^", "(", ")"};
+
 
     public CalculatorFrame() {
 
@@ -116,7 +119,7 @@ public class CalculatorFrame extends JFrame {
         add(createButton(specialButtons[1]), gbc);
 
 
-        // add buttons to activate "extend" Mode
+        // add radio buttons to activate "extend" Mode
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.weighty = 0.25;
@@ -133,6 +136,7 @@ public class CalculatorFrame extends JFrame {
         radioGroup.add(radio1);
         radioGroup.add(radio2);
 
+        // normal mode is default
         radio1.setSelected(true);
 
         add(radio1, gbc);
@@ -149,12 +153,20 @@ public class CalculatorFrame extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
 
+        // create all extended buttons
         for (String name : extendedFunctions) {
             extendedButtonsPane.add(createButton(name));
         }
 
+        // put them on a JPanel
+        add(extendedButtonsPane, gbc);
+
+        // make Panel invisible, because Normal mode doesn't show them
+        extendedButtonsPane.setVisible(false);
+
     }
 
+    // a simple function for creating buttons so all buttons have the same Font etc... (prevents code repetition)
     private JButton createButton(String name){
         JButton button = new JButton();
         Font currentFont = button.getFont();
@@ -167,8 +179,11 @@ public class CalculatorFrame extends JFrame {
         return button;
     }
 
+    // special case for multiple button creation based on the button Arrays. (prevents Code repetition)
     private void createMultipleButtons(String[] buttonArray, int row, int numberRows, int column, int numberColumns, Boolean byRow) {
         int counter = 0;
+
+        // there is an if / else for deciding on the insertion order by row or by col
 
         if (byRow) {
             for (String buttonName : buttonArray) {
@@ -189,6 +204,7 @@ public class CalculatorFrame extends JFrame {
         }
     }
 
+    // The calculation is shown by simply concatenate all Strings in calculation ArrayList
     public static void displayCalculation() {
         String calcString = "";
 
@@ -198,6 +214,8 @@ public class CalculatorFrame extends JFrame {
         display.setText(calcString);
     }
 
+    // The result is drawn by first checking if it's an integer and therefore drawn without a .0
+    // or with the full .xxxxxxx numbers of the result if it is an double value!
     public static void displayResult() {
         Double result = calculateCalculation();
         if (result == Math.floor(result)) {
@@ -208,17 +226,19 @@ public class CalculatorFrame extends JFrame {
         }
     }
 
+    // Method for expanding the extended Buttons Panel
     public void extendView() {
 
-        add(extendedButtonsPane, gbc);
+        extendedButtonsPane.setVisible(true);
 
         revalidate();
         repaint();
     }
 
+    // Method for hiding extended Button Panel
     public void normalView() {
 
-        remove(extendedButtonsPane);
+        extendedButtonsPane.setVisible(false);
 
         revalidate();
         repaint();
