@@ -2,10 +2,8 @@ package Calculator.Handlers;
 
 import Calculator.Windows.CalculatorFrame;
 import static Calculator.Calculations.MathFunctions.calculation;
-import static Calculator.Handlers.AdditionalHandler.isLastEntryNumber;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import static Calculator.Handlers.CallHandler.isLastEntryNumber;
+import static Calculator.Handlers.CallHandler.replaceLast;
 
 public class BasicOperatorHandler {
 
@@ -18,7 +16,7 @@ public class BasicOperatorHandler {
         }
 
         else {
-            calculation.set(calculation.size() - 1, command);
+            replaceLast(command);
         }
 
         // reprint calculation on display

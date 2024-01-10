@@ -1,28 +1,28 @@
 package Calculator.Handlers;
 
-import Calculator.Calculations.MathFunctions;
-import Calculator.Windows.CalculatorFrame;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import Calculator.Windows.CalculatorFrame;
 import java.util.Arrays;
 
 import static Calculator.Calculations.MathFunctions.calculation;
-import static Calculator.Handlers.AdditionalHandler.isLastEntryNumber;
+import static Calculator.Handlers.CallHandler.isLastEntryNumber;
+import static Calculator.Handlers.CallHandler.replaceLast;
 
 public class ExtendedHandler {
 
     public static void extendedHandler(String command) {
 
+        String lastEntry = calculation.getLast();
+
         switch (command) {
             case "(":
                 //if the last entry is a operator, "(" will be added to calculation
                 // otherwise if the last entry is a number, a multiplication symbol will be added in between
-                if (Arrays.binarySearch(CalculatorFrame.basicOperators, calculation.getLast()) >= 0 | calculation.getLast().equals("^")) {
+                if (Arrays.binarySearch(CalculatorFrame.basicOperators, lastEntry) >= 0 | lastEntry.equals("^")) {
                     calculation.add("(");
                 }
-                else if (calculation.getLast().equals("0")) {
-                    calculation.set(calculation.size() - 1, "(");
+                else if (lastEntry.equals("0")) {
+                    replaceLast("(");
                 }
                 else if (isLastEntryNumber()) {
                     calculation.add("×");
@@ -35,12 +35,12 @@ public class ExtendedHandler {
                 break;
 
             case "√":
-                if (isLastEntryNumber() & !calculation.getLast().equals("0")) {
+                if (isLastEntryNumber() & !lastEntry.equals("0")) {
                     calculation.add("×");
                     calculation.add("√");
                     calculation.add("(");
-                } else if (calculation.getLast().equals("0")){
-                    calculation.set(calculation.size() - 1, "√");
+                } else if (lastEntry.equals("0")){
+                    replaceLast("√");
                     calculation.add("(");
                 } else {
                     calculation.add("√");
@@ -49,7 +49,7 @@ public class ExtendedHandler {
                 break;
 
             case "^":
-                if (isLastEntryNumber() | calculation.getLast().equals(")")) {
+                if (isLastEntryNumber() | lastEntry.equals(")")) {
                 calculation.add("^");
             }
 

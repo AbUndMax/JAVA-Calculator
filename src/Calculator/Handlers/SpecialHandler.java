@@ -4,15 +4,14 @@ import Calculator.Calculations.MathFunctions;
 import Calculator.Windows.CalculatorFrame;
 
 import static Calculator.Calculations.MathFunctions.calculation;
-import static Calculator.Handlers.AdditionalHandler.isLastEntryNumber;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
+import static Calculator.Handlers.CallHandler.isLastEntryNumber;
+import static Calculator.Handlers.CallHandler.replaceLast;
 
 public class SpecialHandler {
 
     public static void specialHandler(String command) {
+
+        String lastEntry = calculation.getLast();
 
         switch (command) {
 
@@ -20,8 +19,9 @@ public class SpecialHandler {
                 // if the last entry in the calculation list is a number and it does not already contain a . the a
                 // "." will be concatenated to the last string in calculation list.
                 if (isLastEntryNumber()) {
-                    if (!calculation.getLast().contains(".")) {
-                        calculation.set(calculation.size() - 1, calculation.getLast() + command);
+
+                    if (!lastEntry.contains(".")) {
+                        replaceLast(lastEntry + command);
                     }
                 }
                 break;
@@ -29,7 +29,7 @@ public class SpecialHandler {
             case "=":
                 // if last entry is a number, the result gets shown on the display, the calculation is cleared and
                 // the new entry is the last result, so we can calculate with our last result.
-                if (isLastEntryNumber() | calculation.getLast().equals(")")) {
+                if (isLastEntryNumber() | lastEntry.equals(")")) {
                     CalculatorFrame.displayResult();
 
                     Double result = MathFunctions.calculateCalculation();
@@ -46,17 +46,19 @@ public class SpecialHandler {
                 return;
 
             case "⌫":
-                String str = calculation.getLast();
 
-                if (str.length() == 1 & !calculation.isEmpty()) {
+                // if the last string is only one Character, the string gets removed from calculation
+                // if this will lead to an empty calculation -> "0" is inserted
+                if (lastEntry.length() == 1) {
                     calculation.removeLast();
 
                     if (calculation.isEmpty()) {
                         calculation.add("0");
                     }
                 }
+                // elsewise the last Character in the last String in calculation will get removed "123" -> "12"
                 else {
-                    calculation.set(calculation.size() - 1, str.substring(0, str.length() - 1));
+                    replaceLast(lastEntry.substring(0, lastEntry.length() - 1));
                 }
         }
 

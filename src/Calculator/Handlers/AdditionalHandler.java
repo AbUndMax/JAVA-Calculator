@@ -1,16 +1,17 @@
 package Calculator.Handlers;
 
-import java.util.Arrays;
-import java.util.List;
-
 import Calculator.Windows.CalculatorFrame;
 
 import static Calculator.Calculations.MathFunctions.calculation;
+import static Calculator.Handlers.CallHandler.replaceLast;
+import static Calculator.Handlers.CallHandler.isLastEntryNumber;
 
 public class AdditionalHandler {
 
 
     public static void additionalHandler(String eventString) {
+        
+        String lastEntry = calculation.getLast();
 
         switch(eventString){
             // clear calculation
@@ -22,19 +23,18 @@ public class AdditionalHandler {
             // changes the last number to negative if positive and to positive if negative
             case "±":
                 if (isLastEntryNumber()) {
-                    if (Double.parseDouble(calculation.getLast()) > 0)
-                        calculation.set(calculation.size() - 1, "-" + calculation.getLast());
+                    if (Double.parseDouble(lastEntry) > 0)
+                        replaceLast("-" + lastEntry);
 
-                    else if (Double.parseDouble(calculation.getLast()) < 0)
-                        calculation.set(calculation.size() - 1, calculation.getLast().substring(1));
+                    else if (Double.parseDouble(lastEntry) < 0)
+                        replaceLast(lastEntry.substring(1));
                 }
-
                 break;
 
             case "%":
                 // simply adds a 0.01 multiplication
                 if (isLastEntryNumber()) {
-                    calculation.set(calculation.size() - 1, String.valueOf(Double.parseDouble(calculation.getLast()) * 0.01));
+                    replaceLast(String.valueOf(Double.parseDouble(lastEntry) * 0.01));
                 }
                 break;
         }
@@ -43,9 +43,4 @@ public class AdditionalHandler {
         CalculatorFrame.displayCalculation();
     }
 
-    // this function checks, rather the last entry in calculation is a number or not!
-    public static final Boolean isLastEntryNumber() {
-        List<String> numbersList = Arrays.asList(CalculatorFrame.numbers);
-        return numbersList.contains(String.valueOf(calculation.getLast().charAt(calculation.getLast().length() - 1)));
-    }
 }

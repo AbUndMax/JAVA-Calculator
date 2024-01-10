@@ -2,6 +2,11 @@ package Calculator.Handlers;
 
 import Calculator.Windows.CalculatorFrame;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static Calculator.Calculations.MathFunctions.calculation;
+
 // This class is the "bridge" between the listeners and handlers. This allows us to use the same handlers for the key and
 // button listeners likewise!!
 
@@ -80,4 +85,15 @@ public class CallHandler {
         return false;
     }
 
+    // this function are for all the other Handlers
+    public static final Boolean isLastEntryNumber() {
+        String lastEntry = calculation.getLast();
+        List<String> numbersList = Arrays.asList(CalculatorFrame.numbers);
+
+        return numbersList.contains(String.valueOf(lastEntry.charAt(lastEntry.length() - 1)));
+    }
+
+    public static final void replaceLast(String replacement) {
+        calculation.set(calculation.size() - 1, replacement);
+    }
 }
