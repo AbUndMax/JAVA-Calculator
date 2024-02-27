@@ -1,4 +1,18 @@
-# Project Documentation
+# Calculator Documentation
+
+## The Frames
+
+There are two views.
+Booth on one window. 
+Each view consists of the display, a delete button, the num-pad,
+mathematical operators and two radio buttons which allow to swap between
+booth views.
+
+**normal-view:**
+![Calculator_img.png](Images%2FCalculator_img.png)
+
+**extended-view:**
+![Calculator_extended_img.png](Images%2FCalculator_extended_img.png)
 
 ## Calculation
 
@@ -69,20 +83,21 @@ the logic is described there.
 
 ## GUI
 
-For the Calculaot GUI I chosed the GridBagLayout to have better control on where to place the buttons.
-The display is put on a ScrollPane so if the calculation would get to long, one is still able to scrolll through the calculation.
+For the calculation GUI I choose the GridBagLayout to have better control on where to place the buttons.
+The display is put on a ScrollPane so if the calculation gets to long,
+one is still able to scroll through the calculation.
 
-Display and delete button are booth placed on a JPanel with BorderLayout so I can resize the Button to a fixed value.
+Display and delete button are booth placed on a JPanel with BorderLayout, so I can resize the Button to a fixed value.
 
-The extended function buttons i.e. √, ^, ( and ) are placed on a JPanel which is activatet or deactivated based on the
+The extended function buttons i.e. √, ^, ( and ) are placed on a JPanel which is activated or deactivated based on the
 radio buttons
 
-for the other buttons I used loops for easally add them onto the frame and still fulfill "Don't repeat yourself"
+for the other buttons, I used loops to easily add them onto the frame and still fulfill "Don't repeat yourself"
 
 ## Listeners & Handlers
 
-For the Listeners I chosed a way to channel both inputs from key and buttons to the same handlers.
-Therefore, I didn't had to copy all the code from the button handlers to the key handlers.
+For the listeners, I chose a way to channel both inputs from key and buttons to the same handlers.
+Therefore, I didn't have to copy all the code from the button handlers to the key handlers.
 
 This is done by a "connector" class called
 `Calculator.Handlers.CallHandler`
