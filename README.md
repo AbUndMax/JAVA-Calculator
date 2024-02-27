@@ -11,11 +11,11 @@ booth views.
 <div style="display: flex; justify-content: space-around; align-items: center;">
   <div style="text-align: center;">
     <p style="margin-bottom: 0px;"><strong>normal-view</strong></p>
-    <img src="Images/Calculator_img.png" width="400" /><br>
+    <img src="Images/Calculator_img.png" width="300" /><br>
   </div>
   <div style="text-align: center;">
     <p style="margin-bottom: 0px;"><strong>extended-view</strong></p>
-    <img src="Images/Calculator_extended_img.png" width="400" /><br>
+    <img src="Images/Calculator_extended_img.png" width="300" /><br>
   </div>
 </div>
 
