@@ -8,16 +8,9 @@ Each view consists of the display, a delete button, the num-pad,
 mathematical operators and two radio buttons which allow to swap between
 booth views.
 
-<div style="display: flex; justify-content: space-around; align-items: center;">
-  <div style="text-align: center;">
-    <p style="margin-bottom: 0px;"><strong>normal-view</strong></p>
-    <img src="Images/Calculator_img.png" width="300" /><br>
-  </div>
-  <div style="text-align: center;">
-    <p style="margin-bottom: 0px;"><strong>extended-view</strong></p>
-    <img src="Images/Calculator_extended_img.png" width="300" /><br>
-  </div>
-</div>
+|                  **normal-view**                   |                          **extended-view**                           |
+|:--------------------------------------------------:|:--------------------------------------------------------------------:|
+| ![Calculator_img.png](Images%2FCalculator_img.png) | ![Calculator_extended_img.png](Images%2FCalculator_extended_img.png) |
 
 ## Calculation
 
